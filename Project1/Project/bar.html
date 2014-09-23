@@ -5,9 +5,9 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<title>NightLife</title>
-	<link rel="stylesheet" type="text/css" href="styles/style.css">
+	<link rel="stylesheet" type="text/css" href="styles/stylebar.css">
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Shadows+Into+Light+Two" />
-  <script language="JavaScript" type="text/javascript" src="scripts/jquery-1.11.1-1.js"></script>
+  <script language="JavaScript" type="text/javascript" src="scripts/jquery-1.11.1.js"></script>
 
 </head> 
 <body>
@@ -37,7 +37,7 @@
 
  
   <center>
-  <form id="food-form">
+  <form id="bar-form">
     <div class="item text">
         <label>Name</label>
         <div class="field"><input type="text" name="name" /></div>
@@ -52,17 +52,17 @@
     </div>
     <div class="button-wrapper">
         <div class="item button">
-          <div class="field"><input type="button" id="food-op-discard" value="Discard" /></div>
+          <div class="field"><input type="button" id="bar-op-discard" value="Discard" /></div>
         </div>
         <div class="item button button-default">
-          <div class="field"><input type="submit" id="food-op-save" value="Save" /></div>
+          <div class="field"><input type="submit" id="bar-op-save" value="Save" /></div>
         </div>
     </div>
     <input type="hidden" name="id_entry" value="0" />
   </form>
 
-   <table id="food-table">
-      <tr id="food-head">
+   <table id="bar-table">
+      <tr id="bar-head">
         <th>#</th>
         <th>Name</th>
         <th>Rating</th>

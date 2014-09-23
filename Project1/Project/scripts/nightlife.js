@@ -1,23 +1,23 @@
-var Food = {
-    index: window.localStorage.getItem("food:index"),
-    $table: document.getElementById("food-table"),
-    $form: document.getElementById("food-form"),
-    $button_save: document.getElementById("food-op-save"),
-    $button_discard: document.getElementById("food-op-discard"),
+var Bar = {
+    index: window.localStorage.getItem("bar:index"),
+    $table: document.getElementById("bar-table"),
+    $form: document.getElementById("bar-form"),
+    $button_save: document.getElementById("bar-op-save"),
+    $button_discard: document.getElementById("bar-op-discard"),
 
     init: function() {
         // initialize storage index
-        if (!Food.index) {
-            window.localStorage.setItem("Food:index", Food.index = 1);
+        if (!Bar.index) {
+            window.localStorage.setItem("Bar:index", Bar.index = 1);
         }
 
         // initialize form
-        Food.$form.reset();
-        Food.$button_discard.addEventListener("click", function(event) {
-            Food.$form.reset();
-            Food.$form.id_entry.value = 0;
+        Bar.$form.reset();
+        Bar.$button_discard.addEventListener("click", function(event) {
+            Bar.$form.reset();
+            Bar.$form.id_entry.value = 0;
         }, true);
-        Food.$form.addEventListener("submit", function(event) {
+        Bar.$form.addEventListener("submit", function(event) {
             var entry = {
                 id: parseInt(this.id_entry.value),
                 first_name: this.first_name.value,
@@ -25,12 +25,12 @@ var Food = {
                 email: this.email.value
             };
             if (entry.id == 0) { // add
-                Food.storeAdd(entry);
-                Food.tableAdd(entry);
+                Bar.storeAdd(entry);
+                Bar.tableAdd(entry);
             }
             else { // edit
-                Food.storeEdit(entry);
-                Food.tableEdit(entry);
+                Bar.storeEdit(entry);
+                Bar.tableEdit(entry);
             }
 
             this.reset();
@@ -40,36 +40,36 @@ var Food = {
 
         // initialize table
         if (window.localStorage.length - 1) {
-            var food_list = [], i, key;
+            var bar_list = [], i, key;
             for (i = 0; i < window.localStorage.length; i++) {
                 key = window.localStorage.key(i);
-                if (/Food:\d+/.test(key)) {
-                    food_list.push(JSON.parse(window.localStorage.getItem(key)));
+                if (/Bar:\d+/.test(key)) {
+                    bar_list.push(JSON.parse(window.localStorage.getItem(key)));
                 }
             }
 
-            if (food_list.length) {
-                food_list
+            if (bar_list.length) {
+                bar_list
                     .sort(function(a, b) {
                         return a.id < b.id ? -1 : (a.id > b.id ? 1 : 0);
                     })
-                    .forEach(Food.tableAdd);
+                    .forEach(Bar.tableAdd);
             }
         }
-        Food.$table.addEventListener("click", function(event) {
+        Bar.$table.addEventListener("click", function(event) {
             var op = event.target.getAttribute("data-op");
             if (/edit|remove/.test(op)) {
-                var entry = JSON.parse(window.localStorage.getItem("Food:"+ event.target.getAttribute("data-id")));
+                var entry = JSON.parse(window.localStorage.getItem("Bar:"+ event.target.getAttribute("data-id")));
                 if (op == "edit") {
-                    Food.$form.first_name.value = entry.first_name;
-                    Food.$form.last_name.value = entry.last_name;
-                    Food.$form.email.value = entry.email;
-                    Food.$form.id_entry.value = entry.id;
+                    Bar.$form.first_name.value = entry.first_name;
+                    Bar.$form.last_name.value = entry.last_name;
+                    Bar.$form.email.value = entry.email;
+                    Bar.$form.id_entry.value = entry.id;
                 }
                 else if (op == "remove") {
                     if (confirm('Are you sure you want to remove "'+ entry.first_name +'" from your list?')) {
-                        Food.storeRemove(entry);
-                        Food.tableRemove(entry);
+                        Bar.storeRemove(entry);
+                        Bar.tableRemove(entry);
                     }
                 }
                 event.preventDefault();
@@ -78,15 +78,15 @@ var Food = {
     },
 
     storeAdd: function(entry) {
-        entry.id = Food.index;
-        window.localStorage.setItem("Food:index", ++Food.index);
-        window.localStorage.setItem("Food:"+ entry.id, JSON.stringify(entry));
+        entry.id = Bar.index;
+        window.localStorage.setItem("Bar:index", ++Bar.index);
+        window.localStorage.setItem("Bar:"+ entry.id, JSON.stringify(entry));
     },
     storeEdit: function(entry) {
-        window.localStorage.setItem("Food:"+ entry.id, JSON.stringify(entry));
+        window.localStorage.setItem("Bar:"+ entry.id, JSON.stringify(entry));
     },
     storeRemove: function(entry) {
-        window.localStorage.removeItem("Food:"+ entry.id);
+        window.localStorage.removeItem("Bar:"+ entry.id);
     },
 
     tableAdd: function(entry) {
@@ -102,7 +102,7 @@ var Food = {
         $td.innerHTML = '<a data-op="edit" data-id="'+ entry.id +'">Edit</a> | <a data-op="remove" data-id="'+ entry.id +'">Remove</a>';
         $tr.appendChild($td);
         $tr.setAttribute("id", "entry-"+ entry.id);
-        Food.$table.appendChild($tr);
+        Bar.$table.appendChild($tr);
     },
     tableEdit: function(entry) {
         var $tr = document.getElementById("entry-"+ entry.id), $td, key;
@@ -119,7 +119,7 @@ var Food = {
         $tr.appendChild($td);
     },
     tableRemove: function(entry) {
-        Food.$table.removeChild(document.getElementById("entry-"+ entry.id));
+        Bar.$table.removeChild(document.getElementById("entry-"+ entry.id));
     }
 };
-Food.init();
+Bar.init();
