@@ -2,21 +2,42 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+
+    // load in sounds:
+    ow.loadSound("sounds/jdee_beat.mp3");
+    dog.loadSound("sounds/dog.mp3");
+
+    
     xPos = 0;
     xVel = 3;
+    
+
+    
 }
+
 
 //--------------------------------------------------------------
 void ofApp::update(){
+
+    
+    
     xPos = xVel + xPos;
-    if (xPos < 0 || xPos > ofGetWidth()) {
+    if (xPos < 0) {
         xVel = -xVel;
+        dog.play();
     }
+    
+    else if (xPos > ofGetWidth()) {
+         xVel = -xVel;
+         ow.play();
+    }
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    ofCircle(xPos, ofGetHeight()/2, 20);
+   
+    ofCircle(xPos, ofGetHeight()/2 ,22);
 }
 
 //--------------------------------------------------------------
