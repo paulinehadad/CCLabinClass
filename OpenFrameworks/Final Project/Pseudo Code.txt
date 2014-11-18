@@ -1,0 +1,60 @@
+setup() {
+	Initiate webcam
+	Load sounds
+	Call setup function for all bubbles
+}
+
+update() {
+ 	Call an update to get a new frame from the camera
+ 	if there is a new frame {
+ 		look for faces in it
+ 	}
+ 	make all bubble moves
+
+draw() {
+ 	draw the image i get from the camera
+ 	display all the bubbles
+	for every face found {
+		draw a white rectangle around it
+	}
+
+	convert x and y to string for debugging
+	“x = …“
+	“y=…”
+
+	if the head is on any side of the window {
+		play Ellie Goulding
+	}
+	if the head is on the top, middle {
+		play Beyonce
+	}
+	if the head is on the left, middle {
+		play Iggy
+	}
+	if the head is on the right, middle
+		play rock’n’roll
+	}
+
+
+BUBBLES (for display only):
+setup() {
+	sets the size of the bubbles to random between 40 and 60
+	sets velocity to random
+	sets the colors to random
+}
+
+move() {
+	sets initial position
+	if a bubble hits a side {
+		reverse direction
+	}
+}
+
+display() {
+	sets up shape of bubbles
+	convert x and y to strings for debbuging
+	display instructions on screen
+	
+}
+
+ 
